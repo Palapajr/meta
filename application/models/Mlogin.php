@@ -2,15 +2,16 @@
 
 class Mlogin extends CI_Model {
 
-    public function login($post)
-    {
-        $this->db->select('*');
-        $this->db->from('user');
-        $this->db->where('username', $post['username']);
-        $this->db->where('password', sha1($post['password']));
-        $query = $this->db->get();
-        return $query;
+    function query_validasi_username($username){
+    	$result = $this->db->query("SELECT * FROM user WHERE username='$username' LIMIT 1");
+        return $result;
+    }
+
+    function query_validasi_password($username,$password){
+    	$result = $this->db->query("SELECT * FROM user WHERE username='$username' AND password=SHA2('$password', 224) LIMIT 1");
+        return $result;
     }
 
 }
+
 ?>
