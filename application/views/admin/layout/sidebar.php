@@ -11,13 +11,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div> 
           <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="<?php echo $this->uri->segment(2) == '' || $this->uri->segment(2) == 'index' || $this->uri->segment(2) == 'index_0' ? 'active' : ''; ?>">
-              <a href="<?php echo base_url(); ?>dashboard" class="nav-link"><i class="fas fa-th"></i><span>Dashboard</span></a>
+            <li class="<?php if ($menu == "dashboard") { echo "active"; } ?>">
+              <a class="nav-link" href="<?php echo base_url(); ?>dashboard"><i class="fas fa-th"></i><span>Dashboard</span></a>
             </li>
 
             <li class="menu-header">Master</li>
             
-            <li class="<?php echo $this->uri->segment(2) == 'blank' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>blank"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
+            <li class="<?php if ($menu == "anggota") { echo "active"; } ?>">
+              <a class="nav-link" href="<?php echo base_url(); ?>anggota"><i class="far fa-square"></i> <span>Master Anggota</span></a></li>
 
 
           </ul>

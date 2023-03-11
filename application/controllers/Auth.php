@@ -45,24 +45,36 @@ class Auth extends CI_Controller {
                     }
                 }else{
                     $url=base_url('auth');
-                    echo $this->session->set_flashdata('msg','<span onclick="this.parentElement.style.display=`none`" class="w3-button w3-large w3-display-topright">&times;</span>
-                    <h3>Uupps!</h3>
-                    <p>Akun kamu telah di blokir. Silahkan hubungi admin.</p>');
+                    echo $this->session->set_flashdata('msg','<div class="alert alert-warning alert-has-icon">
+                    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                    <div class="alert-body">
+                        <div class="alert-title">Warning</div>
+                        Akun anda telah di Nonaktifkan, Silakan Hubungi Administrator !
+                        </div>
+                  </div>');
                     redirect($url);
                 }
             }else{
                 $url=base_url('auth');
-                echo $this->session->set_flashdata('msg','<span onclick="this.parentElement.style.display=`none`" class="w3-button w3-large w3-display-topright">&times;</span>
-                    <h3>Uupps!</h3>
-                    <p>Password yang kamu masukan salah.</p>');
+                echo $this->session->set_flashdata('msg','<div class="alert alert-danger alert-has-icon">
+                <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                <div class="alert-body">
+                    <div class="alert-title">Success</div>
+                    Password Salah !
+                    </div>
+              </div>');
                 redirect($url);
             }
 
         }else{
             $url=base_url('auth');
-            echo $this->session->set_flashdata('msg','<span onclick="this.parentElement.style.display=`none`" class="w3-button w3-large w3-display-topright">&times;</span>
-            <h3>Uupps!</h3>
-            <p>Email yang kamu masukan salah.</p>');
+            echo $this->session->set_flashdata('msg','<div class="alert alert-danger alert-has-icon">
+            <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+            <div class="alert-body">
+                    <div class="alert-title">Alert</div>
+                        Username Salah !
+                    </div>
+            </div>');
             redirect($url);
         }
 

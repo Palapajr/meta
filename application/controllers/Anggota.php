@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Anggota extends CI_Controller {
 
-	function __construct(){
+    function __construct(){
 		parent::__construct();
 		if($this->session->userdata('logged') !=TRUE){
             $url=base_url('auth');
@@ -14,11 +14,10 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
         $data = array(
-			'title' => "Dashboad Meta",
-			'menu' => 'dashboard'
+			'title' => "Data Anggota",
+            'menu' => 'anggota'
 		);
         
-		$this->load->view('admin/dashboard', $data);
-
+		$this->load->view('admin/anggota', $data);
 	}
 }
