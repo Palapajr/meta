@@ -12,14 +12,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
             <li class="<?php if ($menu == "dashboard") { echo "active"; } ?>">
-              <a class="nav-link" href="<?php echo base_url(); ?>dashboard"><i class="fas fa-th"></i><span>Dashboard</span></a>
+              <a class="nav-link" href="<?php echo base_url(); ?>admin"><i class="fas fa-th"></i><span>Dashboard</span></a>
             </li>
 
             <li class="menu-header">Master</li>
             
             <li class="<?php if ($menu == "anggota") { echo "active"; } ?>">
-              <a class="nav-link" href="<?php echo base_url(); ?>anggota"><i class="far fa-square"></i> <span>Master Anggota</span></a></li>
-
+              <a class="nav-link" href="<?php echo base_url(); ?>admin/anggota"><i class="far fa-square"></i> <span>Master Anggota</span></a></li>
 
           </ul>
 

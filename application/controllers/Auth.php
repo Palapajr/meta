@@ -12,7 +12,7 @@ class Auth extends CI_Controller {
         if($this->session->userdata('logged') !=TRUE){
             $this->load->view('view-login');
         }else{
-            $url=base_url('dashboard');
+            $url=base_url('admin');
             redirect($url);
         };
     }
@@ -34,7 +34,7 @@ class Auth extends CI_Controller {
                         $name = $x['fullname'];
                         $this->session->set_userdata('id',$id);
                         $this->session->set_userdata('name',$name);
-                        redirect('dashboard');
+                        redirect('admin');
 
                     }else if($x['user_akses']=='2'){ //user
                         $name = $x['fullname'];
