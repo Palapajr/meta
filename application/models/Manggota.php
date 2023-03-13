@@ -3,8 +3,8 @@
 class Manggota extends CI_Model {
 
     function get_list(){
-    	$result = $this->db->query("SELECT * FROM anggota");
-        return $result;
+    	$data = $this->db->query("SELECT * FROM anggota");
+        return $data->result();
     }
 
     function get_barang_by_kode($kobar){
