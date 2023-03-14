@@ -28,6 +28,10 @@ if ($this->uri->segment(2) == "anggota") { ?>
   <script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/prism/prism.js"></script>
   <script>
+    
+  
+
+
     $(document).ready(function(){
     listUsers();	//pemanggil data user => ID (vanggota->tbody)
 

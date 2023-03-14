@@ -68,64 +68,70 @@ $this->load->view('admin/layout/header');
                     <div class="card-body">
                       <div class="form-group">
                         <label>NPK</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="npk">
                       </div>
                       <div class="form-group">
                         <label>Nama Lengkap</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="nama">
                       </div>
                       <div class="form-group">
                       <label>Jabatan SK</label>
-                          <select class="form-control">
-                            <option>Pilih</option>
-                            <option>Teknisi</option>
-                            <option>IT</option>
+                          <select class="form-control" name="jabatan">
+                            <option value="">Pilih</option>
+                            <option value="Teknisi">Teknisi</option>
+                            <option value="IT">IT</option>
                           </select>
                       </div>
                       <div class="form-group">
                       <label>Unit</label>
-                          <select class="form-control">
-                            <option>Pilih</option>
-                            <option>Sarpras</option>
-                            <option>IT</option>
+                          <select class="form-control" name="unit">
+                            <option value="">Pilih</option>
+                            <option value="Sarpras">Sarpras</option>
+                            <option value="IT">IT</option>
                           </select>
                       </div>
                       <div class="form-group">
                       <label>Pendidikan Tertinggi</label>
-                          <select class="form-control">
-                            <option>Pilih</option>
-                            <option>Di Bawah SMA</option>
-                            <option>SMA</option>
-                            <option>Associate</option>
-                            <option>Bachelor</option>
-                            <option>Master</option>
-                            <option>Doctoral</option>
+                          <select class="form-control" name="pendidikan">
+                            <option value="">Pilih</option>
+                            <option value="Bawah_sma">Di Bawah SMA</option>
+                            <option value="SMA">SMA</option>
+                            <option value="Associate">Associate</option>
+                            <option value="Bachelor">Bachelor</option>
+                            <option value="Master">Master</option>
+                            <option value="Doctoral">Doctoral</option>
                           </select>
                       </div>
                       <div class="form-group">
                         <label class="form-label">Jenis Kelamin</label>
                         <div class="selectgroup selectgroup-pills">
                           <label class="selectgroup-item">
-                            <input type="radio" name="icon-input" value="1" class="selectgroup-input">
+                            <input type="radio" name="gender" value="L" class="selectgroup-input">
                             <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-male"></i> Laki-Laki</span>
                           </label>
                           <label class="selectgroup-item">
-                            <input type="radio" name="icon-input" value="2" class="selectgroup-input">
+                            <input type="radio" name="gender" value="P" class="selectgroup-input">
                             <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-female"></i> Perempuan</span>
                           </label>
                         </div>
                       </div>
                       <div class="form-group">
                         <label>No Hp</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="nope">
                       </div>
                       <div class="form-group">
-                        <label>Subject</label>
-                        <input type="email" class="form-control">
+                      <label>Agama</label>
+                          <select class="form-control" name="agama">
+                            <option value="">Pilih</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Budha">Budha</option>
+                          </select>
                       </div>
                       <div class="form-group mb-0">
                         <label>Alamat</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control" name="alamat"></textarea>
                       </div>
                     </div>
                   </form>

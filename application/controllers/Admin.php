@@ -44,12 +44,12 @@ class Admin extends CI_Controller {
 
     public function addanggota()
     {
-        $this->form_validation->set_rules('username', 'Username', 'required');
-    }
-
-    public function editformanggota()
-    {
-        # code...
+        $nama = $this->input->post('nama');
+        $nama = $this->input->post('');
+        $nama = $this->input->post('nama');
+        $nama = $this->input->post('nama');
+        $nama = $this->input->post('nama');
+        $nama = $this->input->post('nama');
     }
 
     public function editanggota()
