@@ -44,12 +44,33 @@ class Admin extends CI_Controller {
 
     public function addanggota()
     {
-        $nama = $this->input->post('nama');
-        $nama = $this->input->post('');
-        $nama = $this->input->post('nama');
-        $nama = $this->input->post('nama');
-        $nama = $this->input->post('nama');
-        $nama = $this->input->post('nama');
+        if ($this->input->is_ajax_request()) {
+			$this->form_validation->set_rules('npk', 'NPK', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+            $this->form_validation->set_rules('jabatan', 'Jabatan', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+            $this->form_validation->set_rules('unit', 'Unit Anggota', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+            $this->form_validation->set_rules('pendidikan', 'Pendidikan Terakhir', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+            $this->form_validation->set_rules('gender', 'Jenis Kelamin', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+            $this->form_validation->set_rules('nope', 'No Hp Anggota', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+            $this->form_validation->set_rules('tmt_kerja', 'TMT Kerja Anggota', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+            $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+
+
+			if ($this->form_validation->run() == FALSE) {
+				$data = array('responce' => 'error', 'message' => validation_errors());
+			} else {
+				$ajax_data = $this->input->post();
+				if ($this->manggota->insert_anggota($ajax_data)) {
+					$data = array('responce' => 'success', 'message' => 'Record added Successfully');
+				} else {
+					$data = array('responce' => 'error', 'message' => 'Failed to add record');
+				}
+			}
+
+			echo json_encode($data);
+		} else {
+			echo "No direct script access allowed";
+		}
     }
 
     public function editanggota()

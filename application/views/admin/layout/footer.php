@@ -27,9 +27,57 @@ if ($this->uri->segment(2) == "anggota") { ?>
   <script src="<?php echo base_url(); ?>assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/modules/prism/prism.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script>
   <script>
-    
-  
+
+$(document).on("click", "#add", function(e){
+        e.preventDefault();
+
+        var name = $("#npk").val();
+        var email = $("#nama").val();
+        var email = $("#jabatan").val();
+        var email = $("#unit").val();
+        var email = $("#pendidikan").val();
+        var email = $("#gender").val();
+        var email = $("#nope").val();
+        var email = $("#agama").val();
+        var email = $("#tmt_kerja").val();
+        var email = $("#alamat").val();
+
+          $.ajax({
+            url: "addanggota",
+            type: "post",
+            dataType: "json",
+            data: {
+              npk: npk,
+              nama: nama,
+              jabatan: jabatan,
+              unit: unit,
+              pendidikan: pendidikan,
+              gender: gender,
+              nope: nope,
+              agama: agama,
+              tmt_kerja: tmt_kerja,
+              alamat: alamat
+            },
+            success: function(data){
+              if (data.responce == "success") {
+                $('#table-1').DataTable().destroy();
+                listUsers();
+                $('#exampleModal').modal('hide');
+                iziToast["error"](data.message);
+              }else{
+                iziToast["success"](data.message);
+              }
+
+            }
+          });
+
+          $("#form")[0].reset();
+    });
+
+
 
 
     $(document).ready(function(){
