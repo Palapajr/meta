@@ -11,12 +11,12 @@ $this->load->view('admin/layout/header');
 
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-            <div class="breadcrumb-item">data Anggota</div>
+            <div class="breadcrumb-item"><?php echo $title; ?></div>
           </div>
         </div>
 
         <div class="section-body">
-          <h2 class="section-title">Data Anggota</h2>
+          <h2 class="section-title"><?php echo $title; ?></h2>
           
           <div class="row">
             <div class="col-12">
@@ -32,6 +32,7 @@ $this->load->view('admin/layout/header');
                           <th>
                             No
                           </th>
+                          <th>NPK</th>
                           <th>Nama Anggota</th>
                           <th>Jabatan</th>
                           <th>Unit</th>

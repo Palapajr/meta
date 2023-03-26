@@ -34,41 +34,47 @@ if ($this->uri->segment(2) == "anggota") { ?>
 $(document).on("click", "#add", function(e){
         e.preventDefault();
 
-        var name = $("#npk").val();
-        var email = $("#nama").val();
-        var email = $("#jabatan").val();
-        var email = $("#unit").val();
-        var email = $("#pendidikan").val();
-        var email = $("#gender").val();
-        var email = $("#nope").val();
-        var email = $("#agama").val();
-        var email = $("#tmt_kerja").val();
-        var email = $("#alamat").val();
+        var npk = $("#npk").val();
+        var nama = $("#nama").val();
+        var jabatan = $("#jabatan").val();
+        var unit = $("#unit").val();
+        var pendidikan = $("#pendidikan").val();
+        var gender = $("#gender").val();
+        var nope = $("#nope").val();
+        var agama = $("#agama").val();
+        var tmt_kerja = $("#tmt_kerja").val();
+        var alamat = $("#alamat").val();
 
+      
           $.ajax({
             url: "addanggota",
             type: "post",
             dataType: "json",
             data: {
-              npk: npk,
-              nama: nama,
-              jabatan: jabatan,
-              unit: unit,
-              pendidikan: pendidikan,
-              gender: gender,
-              nope: nope,
-              agama: agama,
-              tmt_kerja: tmt_kerja,
-              alamat: alamat
+              npk:npk,
+              nama:nama,
+              jabatan:jabatan,
+              unit:unit,
+              pendidikan:pendidikan,
+              gender:gender,
+              nope:nope,
+              agama:agama,
+              tmt_kerja:tmt_kerja,
+              alamat:alamat
             },
             success: function(data){
               if (data.responce == "success") {
                 $('#table-1').DataTable().destroy();
                 listUsers();
                 $('#exampleModal').modal('hide');
+                
                 iziToast["error"](data.message);
               }else{
-                iziToast["success"](data.message);
+                iziToast.success({
+                  title: 'Hello, world!',
+                  message: 'This awesome plugin is made by iziToast',
+                  position: 'topRight'
+                });
               }
 
             }
@@ -76,9 +82,6 @@ $(document).on("click", "#add", function(e){
 
           $("#form")[0].reset();
     });
-
-
-
 
     $(document).ready(function(){
     listUsers();	//pemanggil data user => ID (vanggota->tbody)
@@ -99,14 +102,15 @@ $(document).on("click", "#add", function(e){
                 for(i=0; i<data.length; i++){
                     html += '<tr style="text-align:center;">' +
                                 '<td>'+ (no++) +'</td>'+
+                                '<td>'+data[i].npk+'</td>'+
                                 '<td>'+data[i].nama+'</td>'+
                                 '<td>'+data[i].jabatan+'</td>'+
                                 '<td>'+data[i].unit+'</td>'+
                                 '<td>'+data[i].nope+'</td>'+
                                 '<td>'+
-                                    '<a href="javascript:;" class="btn btn-success btn-xs item_edit" data="'+data[i].nama+'"><i class="far fa-edit"></i> Edit</a>'+' '+
-                                    '<a href="javascript:;" class="btn btn-info btn-xs item_edit" data="'+data[i].nama+'"><i class="far fa-user"></i> Detail</a>'+' '+
-                                    '<a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="'+data[i].nama+'"><i class="fas fa-times"></i> Hapus</a>'+
+                                    '<a href="javascript:;" class="btn btn-success btn-xs item_edit" data="'+data[i].npk+'"><i class="far fa-edit"></i> Edit</a>'+' '+
+                                    '<a href="javascript:;" class="btn btn-info btn-xs item_edit" data="'+data[i].npk+'"><i class="far fa-user"></i> Detail</a>'+' '+
+                                    '<a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="'+data[i].npk+'"><i class="fas fa-times"></i> Hapus</a>'+
                                 '</td>'+
                             '</tr>';
                 }

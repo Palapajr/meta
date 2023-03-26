@@ -6,6 +6,8 @@ class Admin extends CI_Controller {
 	function __construct(){
 		parent::__construct();
         $this->load->model('manggota');
+
+        // cek login user
 		if($this->session->userdata('logged') !=TRUE){
             $url=base_url('auth');
             redirect($url);
