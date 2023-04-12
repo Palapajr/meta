@@ -1,92 +1,92 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Admin extends CI_Controller
+{
 
-	function __construct(){
-		parent::__construct();
-        $this->load->model('manggota');
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->helper(array('form', 'url'));
+        $this->load->model('Manggota');
 
         // cek login user
-		if($this->session->userdata('logged') !=TRUE){
-            $url=base_url('auth');
+        if ($this->session->userdata('logged') != TRUE) {
+            $url = base_url('auth');
             redirect($url);
-		};
-        
-	}
+        };
+    }
 
-	public function index()
-	{
+    public function index()
+    {
         $data = array(
-			'title' => "Dashboad Meta",
-			'menu' => 'dashboard'
-		);
-        
-		$this->load->view('admin/dashboard', $data);
+            'title' => "Dashboad Meta",
+            'menu' => 'dashboard'
+        );
 
-	}
+        $this->load->view('admin/dashboard', $data);
+    }
 
     public function anggota()
     {
 
         $data = array(
-			'title' => "Data Anggota",
+            'title' => "Data Anggota",
             'menu' => 'anggota'
-		);
-        
-		$this->load->view('admin/anggota', $data);
+        );
+
+        $this->load->view('admin/anggota', $data);
     }
 
-    public function tampildataanggota()
+    public function getAnggota()
     {
-        $data = $this->manggota->get_list();
-        echo json_encode($data);
+        $results = $this->Manggota->getDataTable();
+        $data = [];
+        $no = $_POST['start'];
+        foreach ($results as $field) {
+            $row = array();
+            $row[] = ++$no;
+            $row[] = $field->npk;
+            $row[] = $field->nama;
+            $row[] = $field->jabatan;
+            $row[] = $field->unit;
+            $row[] = $field->nope;
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST["draw"],
+            // "draw" => intval($_POST["draw"]),
+            "recordsTotal" => $this->Manggota->count_all_data(),
+            "recordsFiltered" => $this->Manggota->count_filtered_data(),
+            "data" => $data,
+        );
+        // $this->output->set_content_type('application/json')->set_output(json_encode($output));
+        echo json_encode($output);
     }
 
-
-    public function addanggota()
+    public function addAnggota()
     {
-        if ($this->input->is_ajax_request()) {
-			$this->form_validation->set_rules('npk', 'NPK', 'trim|required', ['required' => '%s Tidak boleh kosong']);
-            $this->form_validation->set_rules('nama', 'Nama', 'trim|required', ['required' => '%s Tidak boleh kosong']);
-            $this->form_validation->set_rules('jabatan', 'Jabatan', 'trim|required', ['required' => '%s Tidak boleh kosong']);
-            $this->form_validation->set_rules('unit', 'Unit Anggota', 'trim|required', ['required' => '%s Tidak boleh kosong']);
-            $this->form_validation->set_rules('pendidikan', 'Pendidikan Terakhir', 'trim|required', ['required' => '%s Tidak boleh kosong']);
-            $this->form_validation->set_rules('gender', 'Jenis Kelamin', 'trim|required', ['required' => '%s Tidak boleh kosong']);
-            $this->form_validation->set_rules('nope', 'No Hp Anggota', 'trim|required', ['required' => '%s Tidak boleh kosong']);
-            $this->form_validation->set_rules('tmt_kerja', 'TMT Kerja Anggota', 'trim|required', ['required' => '%s Tidak boleh kosong']);
-            $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required', ['required' => '%s Tidak boleh kosong']);
+        $data = [
+            'npk' => htmlspecialchars($this->input->post('npk')),
+            'nama' => htmlspecialchars($this->input->post('nama')),
+            'jabatan' => htmlspecialchars($this->input->post('jabatan')),
+            'unit' => htmlspecialchars($this->input->post('unit')),
+            'pendidikan' => htmlspecialchars($this->input->post('pendidikan')),
+            'gender' => htmlspecialchars($this->input->post('gender')),
+            'nope' => htmlspecialchars($this->input->post('nope')),
+            'agama' => htmlspecialchars($this->input->post('agama')),
+            'hobi' => htmlspecialchars($this->input->post('hobi')),
+            'tmt_kerja' => htmlspecialchars($this->input->post('tmt_kerja')),
+            'alamat' => htmlspecialchars($this->input->post('alamat')),
+        ];
 
+        if ($this->Manggota->create($data) > 0) {
+            $message['status'] = 'success';
+        } else {
+            $message['status'] = 'failed';
+        };
 
-			if ($this->form_validation->run() == FALSE) {
-				$data = array('responce' => 'error', 'message' => validation_errors());
-			} else {
-				$ajax_data = $this->input->post();
-				if ($this->manggota->insert_anggota($ajax_data)) {
-					$data = array('responce' => 'success', 'message' => 'Record added Successfully');
-				} else {
-					$data = array('responce' => 'error', 'message' => 'Failed to add record');
-				}
-			}
-
-			echo json_encode($data);
-		} else {
-			echo "No direct script access allowed";
-		}
-    }
-
-    public function editanggota()
-    {
-        # code...
-    }
-
-    public function detailanggota()
-    {
-        # code...
-    }
-
-    public function deleteangota()
-    {
-        # code...
+        $this->output->set_content_type('application/json')->set_output(json_encode($message));
     }
 }
